@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architektura Polski - Piękno w kamieniu i betonie</title>
+    <style>
+        /* Zmienne CSS dla spójnej palety kolorów */
+        :root {
+            --color-white: #ffffff;
+            --color-off-white: #f9f9f7;
+            --color-light-gray: #e5e5e3;
+            --color-gray: #6b6b6b;
+            --color-dark-gray: #333333;
+            --color-accent-brick: #a54e2b;
+            --color-accent-copper: #b87333;
+            --color-accent-gold: #d4af37;
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            
+            --font-sans: 'Montserrat', sans-serif;
+            --font-serif: 'Lora', serif;
+        }
+        
+        /* Resetowanie stylów */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-dark-gray);
+            background-color: var(--color-white);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        a {
+            color: var(--color-accent-brick);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--color-accent-copper);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Układ strony */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) 0;
+        }
+        
+        /* Nagłówek */
+        header {
+            padding: var(--spacing-md) 0;
+            background-color: var(--color-white);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-dark-gray);
+        }
+        
+        .logo a {
+            color: var(--color-dark-gray);
+        }
+        
+        .accent {
+            color: var(--color-accent-brick);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+        
+        nav ul li a {
+            color: var(--color-dark-gray);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--color-accent-brick);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-dark-gray);
+        }
+        
+        /* Hero sekcja */
+        .hero {
+            height: 80vh;
+            background-image: url('/api/placeholder/1200/700');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: var(--color-white);
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--color-accent-brick);
+            color: var(--color-white);
+            border: none;
+            border-radius: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-accent-copper);
+            color: var(--color-white);
+        }
+        
+        /* Sekcje */
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: var(--color-gray);
+            margin-top: -1.5rem;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* Miasta */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .city-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .city-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .city-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .city-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-md);
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--color-white);
+        }
+        
+        .city-overlay h3 {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Style architektoniczne */
+        .styles-container {
+            display: flex;
+            overflow-x: auto;
+            gap: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+        }
+        
+        .style-card {
+            flex: 0 0 auto;
+            width: 300px;
+            background-color: var(--color-off-white);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .style-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .style-content {
+            padding: var(--spacing-md);
+        }
+        
+        .style-content h3 {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-sm);
+        }
+        
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+        
+        /* O autorze */
+        .author-section {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .author-image {
+            flex: 0 0 300px;
+            height: 400px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-content {
+            flex: 1;
+        }
+        
+        /* Miasto podstrona */
+        .city-hero {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .city-hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+        
+        .city-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-white);
+            padding: var(--spacing-lg) 0;
+            width: 100%;
+        }
+        
+        .city-section {
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+        
+        .city-section:last-child {
+            border-bottom: none;
+        }
+        
+        .city-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .city-gallery-item {
+            position: relative;
+        }
+        
+        .city-gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .city-gallery-caption {
+            margin-top: var(--spacing-xs);
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+        
+        /* Stopka */
+        footer {
+            background-color: var(--color-off-white);
+            padding: var(--spacing-lg) 0;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+        
+        /* RWD */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: var(--spacing-sm);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0 0 var(--spacing-xs) 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .author-section {
+                flex-direction: column;
+            }
+            
+            .author-image {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .city-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                margin-bottom: var(--spacing-sm);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .cities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .city-card {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Architektura <span class="accent">Polski</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="#miasta">Miasta</a></li>
+                    <li><a href="#style">Style architektoniczne</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#autor">O autorze</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Architektura Polski</h1>
+            <p>Odkryj piękno i różnorodność polskiej architektury - od gotyckich katedr, przez renesansowe kamienice, aż po nowoczesne bryły XXI wieku.</p>
+            <a href="#miasta" class="btn">Poznaj miasta</a>
+        </div>
+    </section>
+
+    <section class="section" id="o-projekcie">
+        <div class="container">
+            <h2 class="section-title">O projekcie</h2>
+            <div class="about-content">
+                <p>Polska architektura to fascynująca opowieść o historii, kulturze i tożsamości narodu - zapisana w kamieniu, cegłach, stali i szkle. Odkrywając architekturę polskich miast, poznajemy nie tylko estetykę minionych epok, ale również wartości i aspiracje społeczeństwa na przestrzeni wieków.</p>
+                <p>Ta strona ma na celu zaprezentowanie bogactwa architektury polskiej - od średniowiecznych zamków i gotyckich katedr, przez renesansowe ratusze, barokowe świątynie, secesyjne kamienice, modernistyczne osiedla, aż po współczesne przykłady minimalizmu i dekonstruktywizmu. Każde miasto opowiada swoją własną architektoniczną historię, a my chcemy być jej narratorem.</p>
+                <p>Zapraszamy do podróży przez czas i przestrzeń, śladami polskiej architektury.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="miasta">
+        <div class="container">
+            <h2 class="section-title">Miasta</h2>
+            <p class="section-subtitle">Odkryj architektoniczne skarby polskich miast</p>
+            <div class="cities-grid">
+                <a href="krakow.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Kraków">
+                    <div class="city-overlay">
+                        <h3>Kraków</h3>
+                        <p>Średniowieczne mury, renesansowe kamienice i nowoczesne muzea</p>
+                    </div>
+                </a>
+                <a href="warszawa.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Warszawa">
+                    <div class="city-overlay">
+                        <h3>Warszawa</h3>
+                        <p>Od odbudowanej starówki po modernistyczne wieżowce</p>
+                    </div>
+                </a>
+                <a href="wroclaw.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Wrocław">
+                    <div class="city-overlay">
+                        <h3>Wrocław</h3>
+                        <p>Gotyckie kościoły, secesyjne kamienice i nowoczesne realizacje</p>
+                    </div>
+                </a>
+                <a href="gdansk.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Gdańsk">
+                    <div class="city-overlay">
+                        <h3>Gdańsk</h3>
+                        <p>Hanzeatyckie domy, gotyckie kościoły i portowa architektura</p>
+                    </div>
+                </a>
+                <a href="poznan.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Poznań">
+                    <div class="city-overlay">
+                        <h3>Poznań</h3>
+                        <p>Renesansowy ratusz, modernistyczne budynki i współczesne bryły</p>
+                    </div>
+                </a>
+                <a href="lodz.html" class="city-card">
+                    <img src="/api/placeholder/400/400" alt="Łódź">
+                    <div class="city-overlay">
+                        <h3>Łódź</h3>
+                        <p>Fabryczne pałace, secesyjne kamienice i postindustrialna transformacja</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="style">
+        <div class="container">
+            <h2 class="section-title">Style architektoniczne</h2>
+            <p class="section-subtitle">Przegląd stylów obecnych w polskiej architekturze</p>
+            <div class="styles-container">
+                <div class="style-card">
+                    <img src="/api/placeholder/300/200" alt="Gotyk">
+                    <div class="style-content">
+                        <h3>Gotyk</h3>
+                        <p>Strzelisty, monumentalny styl średniowiecza widoczny w katedrach i zamkach.</p>
+                        <a href="style-gotyk.html">Czytaj więcej</a>
+                    </div>
+                </div>
+                <div class="style-card">
+                    <img src="/api/placeholder/300/200" alt="Renesans">
+                    <div class="style-content">
+                        <h3>Renesans</h3>
+                        <p>Harmonijny i proporcjonalny styl odrodzenia widoczny w ratuszach i kamienicach.</p>
+                        <a href="style-renesans.html">Czytaj więcej</a>
+                    </div>
+                </div>
+                <div class="style-card">
+                    <img src="/api/placeholder/300/200" alt="Barok">
+                    <div class="style-content">
+                        <h3>Barok</h3>
+                        <p>Bogaty, dynamiczny styl kontrreformacji widoczny głównie w kościołach.</p>
+                        <a href="style-barok.html">Czytaj więcej</a>
+                    </div>
+                </div>
+                <div class="style-card">
+                    <img src="/api/placeholder/300/200" alt="Secesja">
+                    <div class="style-content">
+                        <h3>Secesja</h3>
+                        <p>Organiczny, dekoracyjny styl przełomu XIX i XX wieku popularny w kamienicach.</p>
+                        <a href="style-secesja.html">Czytaj więcej</a>
+                    </div>
+                </div>
+                <div class="style-card">
+                    <img src="/api/placeholder/300/200" alt="Modernizm">
+                    <div class="style-content">
+                        <h3>Modernizm</h3>
+                        <p>Funkcjonalny, minimalistyczny styl XX wieku obecny w budynkach użyteczności publicznej.</p>
+                        <a href="style-modernizm.html">Czytaj więcej</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Galeria</h2>
+            <p class="section-subtitle">Zbiór najpiękniejszych obiektów architektonicznych Polski</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Sukiennice w Krakowie">
+                    <div class="gallery-item-overlay">
+                        <p>Sukiennice w Krakowie</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Pałac Kultury i Nauki w Warszawie">
+                    <div class="gallery-item-overlay">
+                        <p>Pałac Kultury i Nauki w Warszawie</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Hala Stulecia we Wrocławiu">
+                    <div class="gallery-item-overlay">
+                        <p>Hala Stulecia we Wrocławiu</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Bazylika Mariacka w Gdańsku">
+                    <div class="gallery-item-overlay">
+                        <p>Bazylika Mariacka w Gdańsku</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Stary Browar w Poznaniu">
+                    <div class="gallery-item-overlay">
+                        <p>Stary Browar w Poznaniu</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Manufaktura w Łodzi">
+                    <div class="gallery-item-overlay">
+                        <p>Manufaktura w Łodzi</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Zamek w Malborku">
+                    <div class="gallery-item-overlay">
+                        <p>Zamek w Malborku</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/250/250" alt="Opera Leśna w Sopocie">
+                    <div class="gallery-item-overlay">
+                        <p>Opera Leśna w Sopocie</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="autor">
+        <div class="container">
+            <h2 class="section-title">O autorze</h2>
+            <div class="author-section">
+                <div class="author-image">
+                    <img src="/api/placeholder/300/400" alt="Mikita Szczerbań">
+                </div>
+                <div class="author-content">
+                    <h3>Mikita Szczerbań</h3>
+                    <p>Jestem architektem i fotografem z zamiłowaniem do dokumentowania piękna architektonicznego dziedzictwa Polski. Przez ostatnie dziesięć lat podróżowałem po kraju, fotografując zarówno ikoniczne zabytki, jak i mniej znane perełki architektoniczne w mniejszych miejscowościach.</p>
+                    <p>Moja fascynacja polską architekturą zaczęła się podczas studiów na Wydziale Architektury Politechniki Warszawskiej, gdzie zrozumiałem, jak bogata i różnorodna jest nasza rodzima tradycja budowlana. Od gotyckiej cegły Pomorza i Mazur, przez renesansowe attyki Krakowa, po modernistyczne eksperymenty międzywojnia - polska architektura jest fascynującym świadectwem historii i kultury.</p>
+                    <p>Stworzyłem tę stronę, aby podzielić się moją pasją i zachęcić innych do odkrywania architektonicznych skarbów Polski. Każde zdjęcie i opis jest efektem osobistej wizyty i badań, które prowadzę nieustannie, odkrywając kolejne fascynujące obiekty i historie z nimi związane.</p>
+                    <p>Zapraszam Cię do wspólnej podróży przez architektoniczny krajobraz Polski.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                Architektura <span class="accent">Polski</span>
+            </div>
+            <div class="footer-copyright">
+                Strona stworzona przez: Mikita Szczerbań &copy; 2025. Wszelkie prawa zastrzeżone.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
